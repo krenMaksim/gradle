@@ -5,6 +5,7 @@ ext {
     javaVersion = 1.8
     groupValue = 'com.kren'
     versionValue = '1.0-SNAPSHOT'
+    mainClassName = "com.kren.App"
 }
 
 group = groupValue
@@ -15,6 +16,14 @@ targetCompatibility = javaVersion
 jar {
     //to avoid SNAPSHOT
     version = null
+   
+   manifest {
+        attributes 'Main-Class': "$mainClassName"
+   } 
+
+  from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
 }
 
 repositories {        
