@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+ext {
+    javaVersion = 1.8
+    groupValue = 'com.kren'
+    versionValue = '1.0-SNAPSHOT'
+}
+
+group = groupValue
+version = versionValue
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+jar {
+    //to avoid SNAPSHOT
+    version = null
+}
+
+repositories {        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {    
+    compile 'com.google.guava:guava:23.0'
+    
+    //testCompileOnly(
+     //       'junit:junit:4.12'
+    //)
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    )
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0',
+            'org.junit.vintage:junit-vintage-engine:5.1.0',
+            'org.junit.platform:junit-platform-launcher:1.1.0',
+            'org.junit.platform:junit-platform-runner:1.1.0'
+    )
+}
+
+test {
+    useJUnitPlatform()
+}
