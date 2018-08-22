@@ -4,6 +4,7 @@
 *.classpath
 .metadata
 .settings/
+bin/
  
 # Intellij
 out/
@@ -13,7 +14,8 @@ out/
  
 # Gradle
 .gradle
-/build/
+gradle/
+build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
