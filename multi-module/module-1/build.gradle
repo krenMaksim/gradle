@@ -1,0 +1,10 @@
+jar {
+    //to avoid SNAPSHOT
+    version = null
+    
+}
+
+dependencies {    
+    compile 'com.google.guava:guava:23.0'
+    }
+

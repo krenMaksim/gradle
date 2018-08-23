@@ -1,0 +1,36 @@
+dependencies {    
+    compile (
+        'com.google.guava:guava:23.0',
+        project(':module-1')
+    )
+    
+    //testCompileOnly(
+     //       'junit:junit:4.12'
+    //)
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    )
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0',
+            'org.junit.vintage:junit-vintage-engine:5.1.0',
+            'org.junit.platform:junit-platform-launcher:1.1.0',
+            'org.junit.platform:junit-platform-runner:1.1.0'
+    )
+}
+
+jar {
+   //to avoid SNAPSHOT
+   version = null
+   
+   manifest {
+        attributes 'Main-Class': "com.kren.App"
+   } 
+
+  from {
+    	configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
+
+test {
+    useJUnitPlatform()
+}
