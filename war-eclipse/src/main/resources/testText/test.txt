@@ -1,0 +1,42 @@
+package com.kren.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
+import org.springframework.core.env.Environment;
+
+import com.kren.pojo.Cat;
+import com.kren.pojo.ClientService;
+import com.kren.pojo.Dog;
+import com.kren.pojo.PetFarm;
+
+// нам не нужны т.к. пока бины объявляются в очевидных классах
+//@ComponentScan(basePackageClasses = AppConfig.class)
+//@ComponentScan(basePackages = "com.kren.pojo")
+
+@Configuration
+@Import(AppConfigPart2.class)
+@ComponentScan(basePackageClasses = { PetFarm.class, ClientService.class })
+@PropertySource("classpath:app.properties")
+public class AppConfig {
+
+	@Autowired
+	Environment env;
+
+	@Bean
+	@Scope(scopeName = "prototype")
+	public Cat tom() {
+		System.out.println(env.getProperty("test.prop"));
+		return new Cat("tom", 5);
+	}
+
+	@Bean
+	public Dog li() {
+		return new Dog("li", 3);
+	}
+
+}

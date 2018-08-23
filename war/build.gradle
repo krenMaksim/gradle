@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'war'
+
+ext {
+    javaVersion = 1.8
+    groupValue = 'com.kren'
+    versionValue = '1.0-SNAPSHOT'
+}
+
+group = groupValue
+version = versionValue
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+war {
+    //to avoid SNAPSHOT
+    version = null
+}
+
+repositories {    
+     mavenCentral() 
+}
+
+dependencies {    
+    compile (        
+        'org.springframework:spring-webmvc:4.3.8.RELEASE',        
+        'javax.servlet:jstl:1.2'        
+    )
+
+    providedCompile (       
+        'javax.servlet:javax.servlet-api:3.0.1',        
+        'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
+    )
+}
+
